@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카페 주문 페이지</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            background: #f3f3f3;
+            color: #111;
+        }
+
+        .app {
+            width: 768px;
+            height: 1365px;
+            margin: 0 auto;
+            background: #f3f3f3;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .hero {
+            width: 100%;
+            height: 144px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            padding: 28px 24px 22px;
+            gap: 18px;
+        }
+
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .right {
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px 16px;
+            margin-bottom: 28px;
+        }
+
+        .tab {
+            height: 48px;
+            border: 1px solid #d7d7d7;
+            border-radius: 12px;
+            background: #fff;
+            font-size: 19px;
+            font-weight: 500;
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab.active {
+            background: #5f637f;
+            color: #fff;
+            border-color: #5f637f;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 28px;
+            row-gap: 26px;
+            padding-right: 6px;
+        }
+
+        .product {
+            position: relative;
+            text-align: center;
+        }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            left: 4px;
+            width: 32px;
+            height: 32px;
+            background: #c92c5d;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: lowercase;
+            z-index: 2;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 132px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .name {
+            font-size: 12px;
+            line-height: 1.45;
+            color: #222;
+            min-height: 34px;
+            margin-bottom: 8px;
+            word-break: keep-all;
+        }
+
+        .price {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .cart-panel {
+            flex: 1;
+            background: #efefef;
+            border-radius: 12px 12px 0 0;
+            padding: 26px 22px;
+            position: relative;
+        }
+
+        .cart-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .cart-count {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #111;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .cart-footer {
+            height: 160px;
+            background: #ececec;
+            border-top: 1px solid #e2e2e2;
+            padding: 24px 22px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .total-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 19px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .total-price {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .order-btn {
+            height: 86px;
+            border: none;
+            border-radius: 14px;
+            background: #e2e2e2;
+            color: #bcbcbc;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: default;
+        }
+
+        .bottom {
+            margin-top: auto;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 22px 0 0;
+        }
+
+        .home-btn {
+            width: 100px;
+            height: 94px;
+            background: #5f637f;
+            border-radius: 14px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .home-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .pager-wrap {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        .arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e7e7e7;
+            color: #bcbcbc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .page {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .assist-btn {
+            width: 144px;
+            height: 42px;
+            border-radius: 12px;
+            border: 2px solid #333;
+            background: #f8f8f8;
+            color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 15px;
+            margin-left: 12px;
+            margin-bottom: 6px;
+        }
+
+        .bottom-center {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="hero">
+            <img src="/Img/폴바셋이미지_메뉴상단.png" alt="상단 배너" />
+        </div>
+
+        <div class="content">
+            <div class="left">
+                <div class="tabs">
+                    <div class="tab active">추천</div>
+                    <div class="tab">커피</div>
+                    <div class="tab">아이스크림</div>
+                    <div class="tab">티&amp;라떼</div>
+                    <div class="tab">콜드 음료</div>
+                    <div class="tab">푸드</div>
+                </div>
+
+                <div class="products">
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="https://www.baristapaulbassett.co.kr/upload/product/A/thumbnail_1_202603040651223251.jpg"
+                                alt="콜드브루 더티콜" />
+                        </div>
+                        <div class="name">콜드브루 너티폴</div>
+                        <div class="price">6,000원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="https://www.baristapaulbassett.co.kr/upload/product/A/thumbnail_1_202603040655504451.jpg"
+                                alt="콜드브루 라떼 더티콜" />
+                        </div>
+                        <div class="name">콜드브루 라떼_너티폴</div>
+                        <div class="price">7,000원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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"
+                                alt="블랙소 포로틴 달콤콜드라떼" />
+                        </div>
+                        <div class="name">셀렉스 프로틴 통곡물프라페</div>
+                        <div class="price">7,000원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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2RmDsocQRGYXi0gkE3gxe3U/TH0fOKa2pT/vGAiPfbrHfy7yuff1XQrOLMUzK4WJcCx47yrSrydzw8cR9atANa6lTeX5ofTqHLDbzDwC0mwjTVa7ifXJiGVP7OjSdSn2XgtdHIFpPnfuGi2qt6psJiBNOtUZ+nI4fKT5qBU9QmbTGwOtCf307RL01yp61W1C4vwhE/mFbMWmPdLRImdwqVnp1iDmLg0k/t1ABaLDNot+o/7P4/Pj3H9OGA+dQq3w3qVwFEA1atapGxcGA94ChfPNueq4tX4tXrOAklxGVrWNvfXKBcnmdVuvoH6MVjisI/EktDa1NzKRMnsua7uaOz8F0CrwXCYNpGGpU2dWtBce92pVv6KcCeXsxFUFobmLGkdolwiSDoENatn91boiIoZCIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAo2LwFOr/eMa47Ei47jqFJRBW0+C0m+yCPELOcHsHFS0RPaH/Qv2vn/Ffh4eD7RPhAU1EQi0eH02GQwT7xufAnRSkRAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERB//9k="
+                                alt="비타민C 아사이베리 오거트" />
+                        </div>
+                        <div class="name">비타민C 아사이베리 오거트</div>
+                        <div class="price">7,700원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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"
+                                alt="타이믹 구아바 에이드" />
+                        </div>
+                        <div class="name">타우린 구아바 에이드</div>
+                        <div class="price">6,900원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="badge">new</div>
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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"
+                                alt="제로 칼로리 바나나 레몬 무블티" />
+                        </div>
+                        <div class="name">제로 칼로리 바나나 레몬 무블티</div>
+                        <div class="price">6,500원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhIQEhIWEhIXERUSEhgVGBcQFhUWFRMYFhUVExMYHiggGRslHxMVIT0hJSkrLi4vFx8zODMtNygtLi4BCgoKDg0OGhAQGjIlHyItLS0xLS0tLS0tLy0rLTUtLS0tLS0rLzctLS0tLS0tLS0tLy0tLS0tLS0tLy0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAgMBAQEAAAAAAAAAAAAABQYDBAcBAgj/xAA+EAACAQIDBQYDBQYFBQAAAAAAAQIDEQQSIQUGMUFREyJhcYGRBzKhFUJSscEUstHh8PEjJGKSojNDY3KC/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAIBAwQF/8QAJREBAAMAAgMAAQMFAAAAAAAAAAECEQMhEjFBBKGx8AUiUVJh/9oADAMBAAIRAxEAPwDuIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB42B6CNqudSbgpZVGKk3a+sm8qXtdvxRv0YtRSk7vmzIluPsAGsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDWlyMsnY1HLX1Eth8YbSvU8YR/43/ib5HSllqJror8uD/mSJkEgANYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB5JgYq0voaiepnqGGlEmVQ8xPGL817/ANjbws7x8v6RgxMO75NP2PaMrO/IfRuAApIAAAAAAAAAAAAAAAAAAAAAAAAAABp7X2pSw1KVetLJTitXxbb0UYrm29LG4cg+Le0lUxKw7k8lGgqsIx1Tqzcld26Rj9X1NrGzgnMT8QsRkdeng6bopKTz11Grlbsm4Ri0vdli3U3qo4+nKdO8ZwaVSnL5ot8HfnF66+D4HBftKvVcKTotJ2StBrNZc2+Gl37lx3GhXwlWpWjThOdS1KMHPJFQUrylpfM9I8bc+Wpc1ZrsU+NjyMStYPemMqvY1VGnV0slLNFt+LLFGumr3OU9e1RLNK3AwUn93mjDWxaRg/adbk61zj4gYZ4Ku61Gc6U60u0pyhKUe9/3IWvZ6tOz0syc3U+JlKVC2Ok6VaMlCUlCThNS0jUeRPJwd+StfRPR8S8VT/YalSpZdnOnKnfi551HLHzTkczjvelTUbR6qySd/F2uunud6TFquc7Ev0BsXbeHxcO0w9WNSKdpWunF2vaUXqtGnqSJ+aMFvjOhV7eh3ZqUZW170UlHs5LmrK1vXjqfpWnK6Tta6Ts+XgTauNidfQAJaAAAAAAAAAAAAAAAAAAAAAKDvHtDERrVozouqoJ9gozUaXeSyyrUZOOe2vN89FpahQeIjXVZQlXk/nbheEfaLSXgtFyOgb9Y6lSq5ar0nRn62Wib5a8yu7GxcYtppLNFZZq1/wDcztSOk3mYxAPaM6dfta6ioyTVoK7j1WXKvAisTvIoSlKjmVpXSleKu42crdTq+M2g1T1eZW56r+ZQNuYTEyjKpTjKnG9u5dSld20grX9S4npz61V9gbQr1sVFwvOWeLlflaV9OiO/4Cu5q+RwTV+mvNWOT7tTqUlGpiJzcMzUk405Sj3st7NN20638DquEw8HCE6ck4SSkn2dNpr0imePl8vLf5+70U8cfNahUleSi7L19bGGF7EtTor8EJeVk/ZoVKMfu03GXhGK924nGffteud7+4LPQnOSzaZXC/dV9HO3sUDBbAwTi1OpKE8q1qN5W7a3s016HdtpbHq1ISgq7puStmjF3jfmrSWpxXePA4jDVnF/Opd2TipOa5SUpJno4et1F+/TR2VsejTxVGo4vE0Y1YudO91JX+5N2zW0eV8bNN6nYt2MfiHi1ThSnRwrhKUo1pqpO/CPZwi5RpLhpm5vRHG/tGtUdq1Tg7O/K3gkdL+EeKdSvW1bhToqMb+M1y9GdLzBFLRGy6mACEgAAAAAAAAAAAAAAAAAAAADjfxuqyhicPJPjQf77v8AoVHYGNTmrycVe7SV1fwXIu/x2oXeFn/pqRfo4v8AU55sCPeRUdPVW0TTJjXUqUqbipOaaVm1aS0XgRO2964UXeGaXVOKs/RnmbuIpG9S4svzlxjgraXm3d8Z1rRUMkfNLl4Fh3W+JsMLhY4ecJVJJuSlySlq4rW/6cTk9SXXqY3LU43tM9PTXh4quxYv4sLjGMEuizylw5vRDC/GiUXZ080fVfmzjlj2COUVX40/1d1n8aqbT/y7vbS8tL+Niibx76VcZNSnpFXywj3IR8ld3fi2/TgU6mfWc6xUi/HTutUg8Xd8beWh2P4ERusXPl/hR/fb/Q4XSep+hvgfgsmCqVOdStfyyxSS+v1KzHm5bzb26MADHAAAAAAAAAAAAAAAAAAAAAAVH4hbL7eFKOVSacrX4Nd26fn+hzjB7sSozV05LNZppxVtfXTr4HZ9qxuo3V+9b3X8jDRpxcXFpNeOt0V8dKcmRmOf4LCrNOM1eydknfnwT6kNvput/hyqQkmkm5XurW/1WsdQrbCh3nT7jlx1fHrfkbcMJFRtNRd13r8Hfjx5GTKov4zsS/I2Nw7i5K3D+6MFKk24rg27a6LXq+XmX3frAqniarhadLtO5J6SjdNZZeHDXnZeJobE3d/aGqVK13KLnKTtGCd/lfm46WOexr60/jWmnmqeIouDa42bV1qtOhiiXjfzdSWCcJSlFqccukszk466RazJJWV/DjqU7s0ne7tz04PkioiN2Hjts134U4GR0j2MrPVf1extxp3/AK18PMvHONhIbA3XrV2mlaF9ZcV6W5+B+ifh9s/sMHGn0nL11/kcY+HVTJiHBu2aElo9Lx1WZddGd73ejbD0/G795MyXLltGdQkQAY4AAAAAAAAAAAAAAAAAAAAADT2p8n/0v4Gps+L719NdDd2n/wBN+cf3kYMA000bvQ2I35nlWF1bijLkPlshqlbf3TjW0cFJNvVWb1XR6eOvQp+E3d7CvCacllqLua3eZd5ZYq8Y3cXz81y7DKceprYjC0qlnKza4PnqTMPocP8AUL0jxt3GKlvbunDGqM27VIxt0jJcVf3fuUCpuHKH3WnZptq+qtaytb38OR290dElbTgYK9P8UbmTH1PF+belfCY2P+vzbtHdmvTclKDl0lpG99dfAmN1t3ZV1KfZ6KUYtyumu6msr9ZeyO218PTlo4p+DSNeGDjTTyQUU9Woq1/Gw2VW/KpNf7a5P6KLgd3KlHEqS1payXnlte/v7nXNkxtRpL/xx+quVDGSstC7YaNoRXSKX0Ou9PFyW1kAAcwAAAAAAAAAAAAAAAAAAAABgxqvCXkYKcLJe5tV1eMl4P8AI+IyXBiR7GYkz6UA4GDUrNc2vXQ1KtBf2JKVFPirmrVwVP8ADb/1vB+8bEW34qMRVZSXyyPhbVnBd678EnP6IkXg1+OVujtL68TKqEbWVjllp9dL2EQtqUaumsZcNYyh9JJX9DC6mXS9116ExVwS/CR+Ow/HQqsT9ZMx8RuKd9OrS9y9o5/hburThy7SP7yOgHaE2AAakAAAAAAAAAAAAAAAAAAAAAeMxRhdGYiMJXaur8G114aGSJDI1wZ8VK0lyufVOu+av5CdVAYPtFLjH2MkcdTfO3noYK0U+jI3EYZctCZmYVEQmp0YyWj9tSLxuHmuGv0ItTnB6PT2NmO3G9Jxk/HLY5TyV9T0uKz8Y/tCpDm1+RmW2bq04p+Wh8Tmp/Lrf0I+pQaburDZ+SZH1kwcE8VSy8HNNeFtf0LsUvYSviafhmf/ABf8S6HePSLAANSAAAAAAAAAAAAAAAAAAAAABXZtxqTcVfvyvHnx4rx8CxFKxm0smJrUpNK07q946SSlx4c+JrYWbCyUlmXquHujPkRD4TEp6pq9uq/NaM2HjWuJOYNnE4KEuK9U2n7o0fs5LhOfq8/5m1DaceaPp4um+djnbjrM7nbYtMNWGHivmd/Sxl7Kn+KKPKs6f4iMxLjybfoZ456hvtLrDx5Sj7o1Mdgna61IOpJ8r/kfKqVEvmcV5lRv+G43t2Y/5h6PSnLjr95K5bip7o4hTr1krdyEVK2mspPj1+VlsOiLAADAAAAAAAAAAAAAAAAAAAAAAILePd2OJtOMlTqpWUrXUlyUufqToGikYLZuLoNqVPPHrCWntx+hIU4p/NGcGWcG63UFR2fB/fl6mwsDS6v6klKlF8UvY8VCP4UYajf2Ck/vS+pjqYKivxP1ZL9jHogqMfwr2Q6NVqqo/cg2/d/QjnsbE1pfJ2ces5W+nH6F5SBumo3YexoYaMlHvTnLNUk+Mn+iXQkgDGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/9k="
+                                alt="블루베리 주르르 토핑 아이스크림" />
+                        </div>
+                        <div class="name">블루베리 주르르 토핑 아이스크림</div>
+                        <div class="price">6,900원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyajfqC8-3Ux-ldbX0uTXW0P_Qgc9DwnN_Bg&s"
+                                alt="딸기 주르르 토핑 아이스크림" />
+                        </div>
+                        <div class="name">딸기 주르르 토핑 아이스크림</div>
+                        <div class="price">6,900원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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"
+                                alt="제주말차 카페라떼" />
+                        </div>
+                        <div class="name">제주말차 카페라떼</div>
+                        <div class="price">6,900원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_YqEX4rp4PSzPbpX9D_F2_ok4tDX_V1JLtQ&s"
+                                alt="제주말차 라떼" />
+                        </div>
+                        <div class="name">제주말차 라떼</div>
+                        <div class="price">6,300원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfvGEqt5cuVeJG3oe_Sx_SxuKanVnRGjFvog&s"
+                                alt="제주말차 단팥 프라페" />
+                        </div>
+                        <div class="name">제주말차 단팥 프라페</div>
+                        <div class="price">8,500원</div>
+                    </div>
+
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="https://www.baristapaulbassett.co.kr/upload/product/A/thumbnail_1_202505160928289631.jpg"
+                                alt="콜고" />
+                        </div>
+                        <div class="name">룽고</div>
+                        <div class="price">5,300원</div>
+                    </div>
+                </div>
+
+                <div class="bottom">
+                    <div class="home-btn">
+                        <div class="home-icon">⌂</div>
+                        <div>처음으로</div>
+                    </div>
+
+                    <div class="bottom-center">
+                        <div class="pager-wrap">
+                            <div class="arrow">&lt;</div>
+                            <div class="page">1/2</div>
+                            <div class="arrow">&gt;</div>
+                        </div>
+
+                        <button class="assist-btn">
+                            <span>♿</span>
+                            <span>도움가능</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="cart-panel">
+                    <div class="cart-title">
+                        <div class="cart-count">0</div>
+                        <span>장바구니</span>
+                    </div>
+                    <div class="market"></div>
+                </div>
+
+                <div class="cart-footer">
+                    <div class="total-row">
+                        <span>합계</span>
+                        <span class="total-price">8,500원</span>
+                    </div>
+                    <button class="order-btn">주문하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //여러 개이므로
+        const tabs = document.querySelectorAll(".tab");
+
+        //tabs안에 들어있는 것들 하나씩 꺼내서 반복, forEach(하나씩 전부 실행)
+        tabs.forEach(function (tab) {
+            //상단 카테고리 버튼 클릭 시
+            tab.addEventListener("click", function () {
+                //클릭 전 추천 버튼 클래스 지우기(반복, 여러개 이므로)
+                tabs.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+                //클릭한 버튼에 추천 버튼 클래스 붙여줌
+                this.classList.add("active");
+            })
+        });
+
+        // 음료 하나하나 여러 개
+        const products = document.querySelectorAll(".product");
+        // 장바구니 빈 칸
+        const market = document.querySelector(".market");
+
+        // 음료 하나씩 반복
+        products.forEach(function (product) {
+            // 메뉴 음료 클릭 시
+            product.addEventListener("click", function () {
+                // 클릭한 음료 이름 가져옴
+                const name = product.querySelector(".name").innerText;
+                const price = product.querySelector(".price").innerText;
+                // 장바구니에 넣을 새 div 생성
+                const item = document.createElement("div");
+
+                // 새 div 안에 음료 이름+가격+줄바꿈 넣기
+                item.innerText = name + " " + price+"\n"+"\n";
+
+                // market 안에 추가
+                market.appendChild(item);
+            });
+        });
+    </script>
+</body>
+
+</html>
