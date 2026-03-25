@@ -1,0 +1,258 @@
+body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+
+
+
+/* 진행 단계 */
+.stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    text-align: center;
+}
+
+.step {
+    margin: 0 20px;
+}
+
+.circle {
+    /* border: 1px solid red; */
+    background-color: lightgray;
+    border-radius: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+
+    font-weight: 700;
+}
+
+.first::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background-color: lightgray;
+
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(-100%, -50%);
+
+    z-index: -1;
+}
+
+.second::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background-color: lightgray;
+
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(0, -50%);
+
+    z-index: -1;
+}
+
+.label {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.step.active .circle {
+    background: #d32f2f;
+    color: #fff;
+}
+
+.step.active::after {
+    background-color: #d32f2f;
+}
+
+.done {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+
+
+/* 제목 */
+h1 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+
+
+
+/* 금액 */
+.price-box {
+    margin: 30px 0;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.summary p {
+    margin: 8px 0;
+}
+
+.summary .right {
+    text-align: right;
+}
+
+.willPay {
+    font-weight: bold;
+}
+
+
+
+
+/* 버튼 */
+.button-group {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.button-two {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.button-group button {
+    flex: 0 0 calc(50% - 5px);
+
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+}
+
+
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    
+    border: 1px solid #ddd;
+}
+
+
+.primary {
+    background: #ff2d55;
+    color: #fff;
+}
+
+.small {
+    justify-content: center;
+}
+
+.small .btn {
+    flex: none;
+    width: 120px;
+}
+
+.firstPage {
+    background: #999;
+    color: #fff;
+}
+
+.help {
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+/* ========= 오버레이 ========= */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: none;
+}
+
+/* ========= 모달 ========= */
+.modal {
+    width: 400px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 50px;
+    text-align: center;
+}
+
+/* ========= 텍스트 ========= */
+.modal h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.desc {
+    margin: 15px 0 25px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.highlight {
+    color: #ff2d55;
+    font-weight: bold;
+}

@@ -1,0 +1,402 @@
+body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+}
+
+/* ========= stepper ========== */
+
+.stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    text-align: center;
+}
+
+.step {
+    margin: 0 20px;
+}
+
+.circle {
+    /* border: 1px solid red; */
+    background-color: lightgray;
+    border-radius: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+
+    font-weight: 700;
+}
+
+.first::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background-color: lightgray;
+
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(-100%, -50%);
+
+    z-index: -1;
+}
+
+.second::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background-color: lightgray;
+
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translate(0, -50%);
+
+    z-index: -1;
+}
+
+.label {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.step.active .circle {
+    background: #d32f2f;
+    color: #fff;
+}
+
+.step.active::after {
+    background-color: #d32f2f;
+}
+
+
+
+/* ========= 카드 ========= */
+.card {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background: #5a5a73;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+}
+
+.sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+
+
+/* ========= 테이블 ========= */
+.table-wrap {
+    margin-top: 20px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table thead th {
+    text-align: left;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.order-table th.center,
+.order-table td.center {
+    text-align: center;
+}
+
+.order-table tbody td {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-table td.center {
+    vertical-align: middle;
+}
+
+.menu {
+    margin: 0;
+    font-weight: bold;
+}
+
+.option {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
+
+
+
+/* ========= scroll ========= */
+.scroll {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.scroll .button {
+    background-color: #ddd;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    margin: 0 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* ========= 합계 ========= */
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.summary p {
+    margin: 8px 0;
+}
+
+.summary .right {
+    text-align: right;
+}
+
+.total {
+    font-weight: bold;
+}
+
+
+
+/* ========= 버튼 ========= */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    
+    border: 1px solid #ddd;
+}
+
+
+.primary {
+    background: #ff2d55;
+    color: #fff;
+}
+
+.small {
+    justify-content: center;
+}
+
+.small .btn {
+    flex: none;
+    width: 120px;
+}
+
+.firstPage {
+    background: #999;
+    color: #fff;
+}
+
+.help {
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+
+
+
+
+
+/* ========= 오버레이 ========= */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    display: none;
+}
+
+/* ========= 모달 ========= */
+.modal {
+    width: 400px;
+    background: #fff;
+    border-radius: 25px;
+    padding: 50px;
+    text-align: center;
+}
+
+/* ========= 텍스트 ========= */
+.modal h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.desc {
+    margin: 15px 0 25px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.highlight {
+    color: #ff2d55;
+    font-weight: bold;
+}
+
+/* ========= 번호 입력 박스 ========= */
+.phone-box {
+    background: #eee;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.phone-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.phone-value {
+    font-weight: bold;
+
+    margin-right: 30px;
+}
+
+
+/* ========= 키패드 ========= */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.keypad button {
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    background: #eee;
+    font-size: 20px;
+    font-weight: 700;
+    vertical-align: baseline;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+}
+
+.keypad button.dark {
+    background: #5a5a73;
+    color: #fff;
+}
+
+.keypad .btnDel {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ========= 동의 ========= */
+.agree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.agree input {
+    width: 16px;
+    height: 16px;
+}
+
+.agree .small {
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 15px;
+    padding: 3px 10px;
+    font-size: 12px;
+}
+
+/* ========= 버튼 ========= */
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn.outline {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.btn.primary {
+    background: #ff2d55;
+    color: #fff;
+    border: none;
+}

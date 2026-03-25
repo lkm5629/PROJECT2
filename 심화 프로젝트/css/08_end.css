@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+/* 상단 배너 */
+.top-banner {
+    background: #4f4f63;
+    color: white;
+    padding: 15px;
+    border-radius: 40px;
+    width: 80%;
+    margin: 0 auto 40px;
+}
+
+/* 타이틀 */
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.order-number {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* 구분선 */
+.divider {
+    width: 80%;
+    height: 20px;
+    background: #4f4f63;
+    margin: 0 auto 30px;
+    border-radius: 10px;
+}
+
+/* 영수증 박스 */
+.receipt-box {
+    width: 250px;
+    height: 250px;
+    background: white;
+    border: 2px solid #ccc;
+    margin: 0 auto 30px;
+
+    position: relative;
+    top: -40px;
+}
+
+/* 설명 */
+.desc {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* 타이머 */
+.timer {
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.timer .time {
+    color: red;
+    font-weight: bold;
+}
+
+
+/* 버튼 */
+.button-group {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.button-two {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.button-group button {
+    flex: 0 0 calc(50% - 5px);
+
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+}
+
+
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    
+    border: 1px solid #ddd;
+}
+
+
+.primary {
+    background: #ff2d55;
+    color: #fff;
+}
+
+.small {
+    justify-content: center;
+}
+
+.small .btn {
+    flex: none;
+    width: 120px;
+}
+
+.firstPage {
+    background: #999;
+    color: #fff;
+}
+
+.help {
+    background: #fff;
+    border: 1px solid #ccc;
+}
